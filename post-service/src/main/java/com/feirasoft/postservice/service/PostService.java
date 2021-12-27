@@ -9,5 +9,5 @@ public interface PostService {
     void storePost(Post post);
     void updatePost(Long id, Post post);
     void deletePost(Long id);
-
+    Post viewPost(Long id);
 }

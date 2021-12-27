@@ -27,4 +27,16 @@ public class PostController {
         postService.storePost(post);
         return ResponseEntity.noContent().build();
     }
+
+    @PatchMapping
+    public ResponseEntity<?> updatePost(@RequestBody Post post, Long id) {
+        postService.updatePost(id, post);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> deletePost(Long id) {
+        postService.deletePost(id);
+        return ResponseEntity.noContent().build();
+    }
 }
