@@ -1,6 +1,6 @@
 package com.feirasoft.postservice.service;
 
-import com.feirasoft.postservice.model.post.Category;
+import com.feirasoft.postservice.model.Category;
 
 public interface PostCategoryService {
     void createCategory(Category category);

@@ -1,13 +1,20 @@
 package com.feirasoft.postservice.service;
 
-import com.feirasoft.postservice.model.post.Post;
+import com.feirasoft.postservice.dto.PostDto;
+import com.feirasoft.postservice.model.Post;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface PostService {
-    Collection<Post> retreivePosts();
-    void storePost(Post post);
-    void updatePost(Long id, Post post);
-    void deletePost(Long id);
-    Post viewPost(Long id);
+
+    List<Post> retreivePosts();
+
+    PostDto storePost(PostDto postDto);
+
+    void updatePost(PostDto postDto);
+
+    void deletePost(PostDto postDto);
+
+    PostDto viewPost(PostDto postDto);
 }

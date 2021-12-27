@@ -1,7 +1,7 @@
 package com.feirasoft.postservice.repository;
 
-import com.feirasoft.postservice.model.post.Category;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.feirasoft.postservice.model.Category;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface CategoryRepository extends JpaRepository<Category, Integer> {
+public interface CategoryRepository extends MongoRepository<Category, String> {
 }
