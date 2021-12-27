@@ -1,29 +1,30 @@
-package com.feirasoft.postservice.model.model;
+package com.feirasoft.postservice.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
-@Entity
-@Table(name = "posts")
+@Document(collection = "posts")
 public class Post {
     @Id
-    @GeneratedValue
-    private Long id;
+    private String id;
     private String title;
     private String content;
     private int likeCount;
+
+    @DBRef
+    private Set<Category> categories;
 
     @CreationTimestamp
     private Timestamp created_at;

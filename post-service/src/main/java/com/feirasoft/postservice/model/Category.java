@@ -1,17 +1,22 @@
-package com.feirasoft.postservice.model.model;
+package com.feirasoft.postservice.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
+import org.springframework.data.mongodb.core.index.IndexDirection;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
-@Entity
-@Table(name = "categories")
+@Accessors(chain = true)
+@Document(collection = "categories")
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
+
+    @Indexed(unique = true, direction = IndexDirection.DESCENDING)
     private String name;
 }
