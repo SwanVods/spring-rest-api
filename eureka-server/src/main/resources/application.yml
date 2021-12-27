@@ -1,0 +1,68 @@
+spring:
+  application:
+    name: eureka-server
+  jmx:
+    unique-names: true
+
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    serviceUrl:
+      defaultZone: ${eureka.cluster.defaultZone:http://localhost:8761/eureka/}
+  server:
+    wait-time-in-ms-when-sync-empty: 0
+    enable-self-preservation: false
+
+management:
+  info:
+    git:
+      enabled: true
+      mode: full
+  health:
+    default:
+      enable: true
+  endpoints:
+    enabled-by-default: true
+    jmx:
+      domain: com.feirasoft.eurekaserver
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    beans:
+      cache:
+        time-to-live: 10s
+    health:
+      show-details: ALWAYS
+    prometheus:
+      enabled: true
+    jolokia:
+      enabled: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+---
+spring:
+  config:
+    activate:
+      on-profile: sit
+---
+spring:
+  config:
+    activate:
+      on-profile: uat
+---
+spring:
+  config:
+    activate:
+      on-profile: production
