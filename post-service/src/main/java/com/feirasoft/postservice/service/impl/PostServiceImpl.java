@@ -8,8 +8,10 @@ import com.feirasoft.postservice.model.Post;
 import com.feirasoft.postservice.repository.CategoryRepository;
 import com.feirasoft.postservice.repository.PostRepository;
 import com.feirasoft.postservice.service.PostService;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,18 +19,18 @@ import java.util.List;
 import static com.feirasoft.postservice.dto.Response.Status.DUPLICATE_ENTITY;
 import static com.feirasoft.postservice.dto.Response.Status.EXCEPTION;
 
-@Service
+@Service(value = "postServiceImpl")
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
 
     @Autowired
     private final PostRepository postRepository;
 
-    @Autowired
-    private final CategoryRepository categoryRepository;
-
-    @Autowired
-    private final PostMapper postMapper;
+//    @Autowired
+//    private final CategoryRepository categoryRepository;
+//
+//    @Autowired
+//    private final PostMapper postMapper;
 
     @Override
     public List<Post> retreivePosts() {

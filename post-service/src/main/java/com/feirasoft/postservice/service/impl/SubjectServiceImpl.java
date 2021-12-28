@@ -4,18 +4,19 @@ import com.feirasoft.postservice.dto.PostDto;
 import com.feirasoft.postservice.model.Post;
 import com.feirasoft.postservice.repository.PostRepository;
 import com.feirasoft.postservice.service.PostService;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class SubjectServiceImpl implements PostService {
 
-    private final PostRepository repository;
+    @Autowired
+    private PostRepository repository;
 
     @Override
     public List<Post> retreivePosts() {

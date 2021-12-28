@@ -3,12 +3,12 @@ package com.feirasoft.postservice.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Id;
 import java.sql.Timestamp;
 import java.util.Set;
 
@@ -26,8 +26,8 @@ public class Post {
     @DBRef
     private Set<Category> categories;
 
-    @CreationTimestamp
+    @CreatedDate
     private Timestamp created_at;
-    @UpdateTimestamp
+    @LastModifiedDate
     private Timestamp updated_at;
 }

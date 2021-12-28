@@ -16,10 +16,6 @@ public class PostMapper {
                 .setTitle(post.getTitle())
                 .setContent(post.getContent())
                 .setLikeCount(post.getLikeCount())
-                .setCategories(new HashSet<CategoryDto>(post.getCategories()
-                        .stream()
-                        .map(category -> new ModelMapper()
-                                .map(category, CategoryDto.class))
-                                .collect(Collectors.toSet())));
+                .setCategories(null);
     }
 }

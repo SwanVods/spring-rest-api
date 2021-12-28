@@ -6,6 +6,8 @@ import com.feirasoft.postservice.dto.Response;
 import com.feirasoft.postservice.model.Post;
 import com.feirasoft.postservice.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,10 +16,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/posts")
-@RequiredArgsConstructor
 public class PostController {
 
     private final PostService postService;
+
+    public PostController(@Qualifier("postServiceImpl") PostService postService) {
+        this.postService = postService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Post>> retreiveAllPost() {
