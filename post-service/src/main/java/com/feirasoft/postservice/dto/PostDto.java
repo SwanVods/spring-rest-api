@@ -9,7 +9,6 @@ import lombok.experimental.Accessors;
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
-@ToString
 public class PostDto {
     private String id;
     private String title;

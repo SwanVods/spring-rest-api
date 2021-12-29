@@ -24,9 +24,6 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
 
     @Autowired
-    private final CategoryRepository categoryRepository;
-
-    @Autowired
     private final ModelMapper modelMapper;
 
     @Override

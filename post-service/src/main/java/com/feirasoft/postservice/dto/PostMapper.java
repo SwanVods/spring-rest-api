@@ -1,5 +1,6 @@
 package com.feirasoft.postservice.dto;
 
+import com.feirasoft.postservice.model.Category;
 import com.feirasoft.postservice.model.Post;
 import org.springframework.stereotype.Component;
 
@@ -13,5 +14,11 @@ public class PostMapper {
                 .setContent(post.getContent())
                 .setLikeCount(post.getLikeCount())
                 .setCategory(null);
+    }
+
+    public static CategoryDto toCategoryDto(Category category) {
+        return new CategoryDto()
+                .setId(category.getId())
+                .setName(category.getName());
     }
 }

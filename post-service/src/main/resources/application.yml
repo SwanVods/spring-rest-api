@@ -13,6 +13,6 @@ server:
     include-binding-errors: always
     include-message: always
 
-#eureka:
-#  instance:
-#    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:${random.uuid}
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:${random.uuid}
