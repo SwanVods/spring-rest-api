@@ -6,11 +6,18 @@ import com.feirasoft.postservice.service.PostCategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+
 @Service
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements PostCategoryService {
 
     private final CategoryRepository categoryRepository;
+
+    @Override
+    public Collection<Category> retrieveCategories() {
+        return null;
+    }
 
     @Override
     public void createCategory(Category category) {

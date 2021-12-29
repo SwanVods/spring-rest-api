@@ -6,8 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import javax.validation.constraints.NotEmpty;
-import java.util.Set;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
@@ -15,11 +14,13 @@ import java.util.Set;
 @NoArgsConstructor
 public class PostRequest {
 
-    @NotEmpty(message = "{constraints.NotEmpty.message}")
+    @NotBlank(message = "Title field cannot be empty.")
     private String title;
 
-    @NotEmpty(message = "{constraints.NotEmpty.message}")
+    @NotBlank(message = "Content field cannot be empty.")
     private String content;
 
-    private Set<Category> category;
+    private int likeCount;
+
+    private Category category;
 }

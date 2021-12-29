@@ -1,20 +1,20 @@
 package com.feirasoft.postservice.service;
 
 import com.feirasoft.postservice.dto.PostDto;
-import com.feirasoft.postservice.model.Post;
 
 import java.util.Collection;
-import java.util.List;
 
 public interface PostService {
 
-    List<Post> retreivePosts();
+    Collection<PostDto> retrievePosts();
 
     PostDto storePost(PostDto postDto);
 
-    void updatePost(PostDto postDto);
+    PostDto updatePost(String id, PostDto postDto);
 
-    void deletePost(PostDto postDto);
+    boolean deletePost(String id);
 
-    PostDto viewPost(PostDto postDto);
+    PostDto viewPost(String id);
+
+    void likePost(String id);
 }

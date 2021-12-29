@@ -3,14 +3,13 @@ package com.feirasoft.postservice.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Id;
-import java.sql.Timestamp;
-import java.util.Set;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -24,10 +23,11 @@ public class Post {
     private int likeCount;
 
     @DBRef
-    private Set<Category> categories;
+    private Category category;
 
-    @CreationTimestamp
-    private Timestamp created_at;
-    @UpdateTimestamp
-    private Timestamp updated_at;
+    @CreatedDate
+    private Date created_at;
+
+    @LastModifiedDate
+    private Date updated_at;
 }
