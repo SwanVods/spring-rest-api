@@ -1,11 +1,13 @@
-package com.feirasoft.postservice.dto;
+package com.feirasoft.postservice.dto.mapper;
 
+import com.feirasoft.postservice.dto.CategoryDto;
+import com.feirasoft.postservice.dto.PostDto;
 import com.feirasoft.postservice.model.Category;
 import com.feirasoft.postservice.model.Post;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PostMapper {
+public class EntityMapper {
 
     public static PostDto toPostDto (Post post){
         return new PostDto()

@@ -1,4 +1,4 @@
-package com.feirasoft.postservice.dto;
+package com.feirasoft.postservice.dto.response;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

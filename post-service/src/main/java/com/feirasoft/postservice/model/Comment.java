@@ -10,26 +10,19 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Collection;
 import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
-@Document(collection = "posts")
-public class Post {
+@Document(collection = "comments")
+public class Comment {
     @Id
     private String id;
-    private String title;
-    private String content;
-    private int likeCount;
 
-    private Collection<Comment> comments;
+    private UserDto userDto;
 
-    @DBRef
-    private Category category;
-
-    private UserDto user;
+    private String comment;
 
     @CreatedDate
     private Date created_at;

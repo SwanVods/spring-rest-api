@@ -1,7 +1,6 @@
 package com.feirasoft.postservice.service.impl;
 
 import com.feirasoft.postservice.dto.CategoryDto;
-import com.feirasoft.postservice.dto.PostMapper;
 import com.feirasoft.postservice.model.Category;
 import com.feirasoft.postservice.repository.CategoryRepository;
 import com.feirasoft.postservice.service.PostCategoryService;

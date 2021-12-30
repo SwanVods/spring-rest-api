@@ -1,10 +1,9 @@
 package com.feirasoft.postservice.service.impl;
 
 
+import com.feirasoft.postservice.dto.mapper.EntityMapper;
 import com.feirasoft.postservice.dto.PostDto;
-import com.feirasoft.postservice.dto.PostMapper;
 import com.feirasoft.postservice.model.Post;
-import com.feirasoft.postservice.repository.CategoryRepository;
 import com.feirasoft.postservice.repository.PostRepository;
 import com.feirasoft.postservice.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +42,7 @@ public class PostServiceImpl implements PostService {
                     .setContent(postDto.getContent())
                     .setLikeCount(postDto.getLikeCount())
                     .setCategory(postDto.getCategory());
-            return PostMapper.toPostDto(postRepository.save(post));
+            return EntityMapper.toPostDto(postRepository.save(post));
         }
         return null;
     }
@@ -57,7 +56,7 @@ public class PostServiceImpl implements PostService {
                     .setContent(postDto.getContent())
                     .setLikeCount(postDto.getLikeCount())
                     .setCategory(postDto.getCategory());
-            return PostMapper.toPostDto(postRepository.save(postModel));
+            return EntityMapper.toPostDto(postRepository.save(postModel));
         }
         return null;
     }
@@ -77,7 +76,7 @@ public class PostServiceImpl implements PostService {
         Optional<Post> post = postRepository.findById(id);
         if(post.isPresent()) {
             Post postModel = post.get();
-            return PostMapper.toPostDto(postModel);
+            return EntityMapper.toPostDto(postModel);
         }
         return null;
     }
@@ -88,7 +87,7 @@ public class PostServiceImpl implements PostService {
         if(post.isPresent()) {
             Post postModel = post.get();
             postModel.setLikeCount(postModel.getLikeCount()+1);
-            PostMapper.toPostDto(postRepository.save(postModel));
+            EntityMapper.toPostDto(postRepository.save(postModel));
         }
     }
 
