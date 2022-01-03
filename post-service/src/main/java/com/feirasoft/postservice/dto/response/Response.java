@@ -1,4 +1,4 @@
-package com.feirasoft.postservice.dto;
+package com.feirasoft.postservice.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;

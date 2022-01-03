@@ -1,23 +1,19 @@
 package com.feirasoft.postservice.service.impl;
 
 
+import com.feirasoft.postservice.dto.mapper.EntityMapper;
 import com.feirasoft.postservice.dto.PostDto;
-import com.feirasoft.postservice.dto.PostMapper;
-import com.feirasoft.postservice.model.Category;
 import com.feirasoft.postservice.model.Post;
-import com.feirasoft.postservice.repository.CategoryRepository;
 import com.feirasoft.postservice.repository.PostRepository;
 import com.feirasoft.postservice.service.PostService;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
-import static com.feirasoft.postservice.dto.Response.Status.DUPLICATE_ENTITY;
-import static com.feirasoft.postservice.dto.Response.Status.EXCEPTION;
+import java.util.Collection;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service(value = "postServiceImpl")
 @RequiredArgsConstructor
@@ -26,15 +22,15 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private final PostRepository postRepository;
 
-//    @Autowired
-//    private final CategoryRepository categoryRepository;
-//
-//    @Autowired
-//    private final PostMapper postMapper;
+    @Autowired
+    private final ModelMapper modelMapper;
 
     @Override
-    public List<Post> retreivePosts() {
-        return postRepository.findAll();
+    public Collection<PostDto> retrievePosts() {
+        return postRepository.findAll()
+                .stream()
+                .map(post -> modelMapper.map(post, PostDto.class))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -44,30 +40,55 @@ public class PostServiceImpl implements PostService {
             post = new Post()
                     .setTitle(postDto.getTitle())
                     .setContent(postDto.getContent())
-                    .setLikeCount(postDto.getLikeCount());
-            return PostMapper.toPostDto(postRepository.save(post));
+                    .setLikeCount(postDto.getLikeCount())
+                    .setCategory(postDto.getCategory());
+            return EntityMapper.toPostDto(postRepository.save(post));
         }
         return null;
     }
 
     @Override
-    public void updatePost(PostDto post) {
-//        List<Post> postById = postRepository.findAll();
-//        if(postById.isPresent()) {
-//            Post postModel = postById.get();
-//            postModel.setTitle(post.getTitle())
-//                    .setContent(post.getContent())
-//                    .setLikeCount(post.getLikeCount());
-//        }
-    }
-
-    @Override
-    public void deletePost(PostDto postDto) {
-//        postRepository.delete(postDto);
-    }
-
-    @Override
-    public PostDto viewPost(PostDto postDto) {
+    public PostDto updatePost(String id, PostDto postDto) {
+        Optional<Post> post = postRepository.findById(id);
+        if(post.isPresent()) {
+            Post postModel = post.get();
+            postModel.setTitle(postDto.getTitle())
+                    .setContent(postDto.getContent())
+                    .setLikeCount(postDto.getLikeCount())
+                    .setCategory(postDto.getCategory());
+            return EntityMapper.toPostDto(postRepository.save(postModel));
+        }
         return null;
     }
+
+    @Override
+    public boolean deletePost(String id) {
+        Optional<Post> post = postRepository.findById(id);
+        if(post.isPresent()) {
+            postRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public PostDto viewPost(String id) {
+        Optional<Post> post = postRepository.findById(id);
+        if(post.isPresent()) {
+            Post postModel = post.get();
+            return EntityMapper.toPostDto(postModel);
+        }
+        return null;
+    }
+
+    @Override
+    public void likePost(String id) {
+        Optional<Post> post = postRepository.findById(id);
+        if(post.isPresent()) {
+            Post postModel = post.get();
+            postModel.setLikeCount(postModel.getLikeCount()+1);
+            EntityMapper.toPostDto(postRepository.save(postModel));
+        }
+    }
+
 }

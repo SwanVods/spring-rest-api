@@ -1,19 +1,22 @@
 package com.feirasoft.postservice.dto;
 
+import com.feirasoft.postservice.model.Category;
+import com.feirasoft.postservice.model.Comment;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
-import java.util.Set;
+import java.util.Collection;
 
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
-@ToString
 public class PostDto {
+    private String id;
     private String title;
     private String content;
     private int likeCount;
-    private Set<CategoryDto> categories;
+    private Category category;
+    private Collection<Comment> comments;
 }

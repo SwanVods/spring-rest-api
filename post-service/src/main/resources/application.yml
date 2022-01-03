@@ -9,7 +9,13 @@ spring:
 
 server:
   port: 8090
+  error:
+    include-binding-errors: always
+    include-message: always
 
-eureka:
-  instance:
-    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:${random.uuid}
+#eureka:
+#  instance:
+#    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:${random.uuid}
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka/
