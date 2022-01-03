@@ -1,21 +1,17 @@
-package com.feirasoft.userservice.model.user;
+package com.feirasoft.authservice.model;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
-@Setter
-@Getter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Entity
+@NoArgsConstructor
 public class UserProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
     @OneToOne
