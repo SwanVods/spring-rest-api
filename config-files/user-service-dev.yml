@@ -1,8 +1,0 @@
-spring:
-  config:
-    activate:
-      on-profile: dev
-
-user-service:
-  minBalance: 100
-  maxBalance: 300
