@@ -6,12 +6,27 @@ spring:
       database: ${MONGODB_SCHEMA:testing-final}
       host: ${MONGODB_HOST:localhost}
       port: ${MONGODB_PORT:27017}
+  kafka:
+    bootstrap-servers:
+      properties:
+        security:
+          protocol: SASL_SSL
+        sasl:
+          mechanism: PLAIN
+      jaas:
+        enabled: true
+        login-module: org.apache.kafka.common.security.plain.PlainLoginModule
+        options:
+          username: D2ASKPWIE5GU7UUJ
+          password: 48VXjxRmGWwHJdy4ur4cN3uq8M1shH3iHt2fnA72iXH3H8kazNdrhKmQLj92+YtL
+      streams:
+        replication-factor: 3
 
 server:
   port: 8090
-#  error:
-#    include-binding-errors: always
-#    include-message: always
+  error:
+    include-binding-errors: always
+    include-message: always
 
 eureka:
   instance:
