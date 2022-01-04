@@ -2,21 +2,23 @@ package com.feirasoft.authservice.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @Entity
 @NoArgsConstructor
-public class UserProfile {
+@Accessors(chain = true)
+public class UserProfile implements Serializable {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
     @MapsId
-    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(name = "first_name")

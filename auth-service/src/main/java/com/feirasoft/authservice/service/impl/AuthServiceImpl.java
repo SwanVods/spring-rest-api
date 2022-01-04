@@ -2,8 +2,10 @@ package com.feirasoft.authservice.service.impl;
 
 
 import com.feirasoft.authservice.model.User;
-import com.feirasoft.authservice.payload.TokenResponse;
-import com.feirasoft.authservice.payload.UsernamePassword;
+import com.feirasoft.authservice.dto.TokenDto;
+import com.feirasoft.authservice.dto.AuthDto;
+import com.feirasoft.authservice.model.UserProfile;
+import com.feirasoft.authservice.model.UserRoles;
 import com.feirasoft.authservice.repository.UserRepository;
 import com.feirasoft.authservice.security.JwtProvider;
 import com.feirasoft.authservice.service.AuthService;
@@ -28,15 +30,23 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public User register(UsernamePassword req) {
-        User user = new User();
-        user.setUsername(req.getUsername());
-        user.setPassword(passwordEncoder.encode(req.getPassword()));
+    public User register(AuthDto req) {
+        User userByEmail = repository.findUserByEmail(req.getEmail());
+        User userByUsername = repository.findUserByUsername(req.getUsername());
+
+        // check for duplicate
+        if(userByEmail != null || userByUsername != null) return null;
+
+        User user = new User()
+                .setUsername(req.getUsername())
+                .setPassword(passwordEncoder.encode(req.getPassword()))
+                .setRole(UserRoles.STUDENT);
+        // TODO: Send logs to kafka
         return repository.save(user);
     }
 
     @Override
-    public TokenResponse generateToken(UsernamePassword req) {
+    public TokenDto generateToken(AuthDto req) {
         try{
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -46,9 +56,9 @@ public class AuthServiceImpl implements AuthService {
             );
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwt = jwtProvider.generateToken(authentication);
-            TokenResponse tokenResponse = new TokenResponse();
-            tokenResponse.setToken(jwt);
-            return tokenResponse;
+            TokenDto tokenDto = new TokenDto();
+            tokenDto.setToken(jwt);
+            return tokenDto;
 
         } catch (BadCredentialsException e) {
             log.error("Bad Credential", e);

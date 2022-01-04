@@ -1,6 +1,7 @@
 package com.feirasoft.authservice.model;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,25 +13,28 @@ import java.util.Collection;
 
 @Data
 @Entity
-@Table(name = "users",
-        indexes = @Index(
-                name = "idx_user_username",
-                columnList = "username",
-                unique = true
-        ))
+@Table(name = "users")
+@Accessors(chain = true)
 public class User implements UserDetails {
-
     @Id
     @GeneratedValue
     private Long id;
+
+    @Column(unique = true)
     private String username;
+
+    @Column(unique = true)
+    private String email;
+
     private String password;
-    private String role;
+
+    @Enumerated(EnumType.STRING)
+    private UserRoles role = UserRoles.STUDENT;
+
     @Column(columnDefinition = "boolean default true")
     private boolean active = true;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
     private UserProfile profile;
 
     @CreationTimestamp
