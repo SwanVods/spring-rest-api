@@ -5,6 +5,7 @@ import com.feirasoft.postservice.dto.mapper.EntityMapper;
 import com.feirasoft.postservice.dto.PostDto;
 import com.feirasoft.postservice.model.Post;
 import com.feirasoft.postservice.repository.PostRepository;
+import com.feirasoft.postservice.service.KafkaService;
 import com.feirasoft.postservice.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -21,7 +22,8 @@ public class PostServiceImpl implements PostService {
 
     @Autowired
     private final PostRepository postRepository;
-
+    @Autowired
+    private final KafkaService kafkaService;
     @Autowired
     private final ModelMapper modelMapper;
 
@@ -42,6 +44,7 @@ public class PostServiceImpl implements PostService {
                     .setContent(postDto.getContent())
                     .setLikeCount(postDto.getLikeCount())
                     .setCategory(postDto.getCategory());
+            kafkaService.sendLog("New post with title " + post.getTitle() + " were stored.");
             return EntityMapper.toPostDto(postRepository.save(post));
         }
         return null;
@@ -66,6 +69,7 @@ public class PostServiceImpl implements PostService {
         Optional<Post> post = postRepository.findById(id);
         if(post.isPresent()) {
             postRepository.deleteById(id);
+            kafkaService.sendLog("Post with id " + post.get().getId() + " were deleted.");
             return true;
         }
         return false;

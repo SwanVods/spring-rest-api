@@ -1,16 +1,17 @@
+server:
+  port: 8084
+
 app:
   topic: logs
 
 spring:
   application:
-    name: post-service
-
+    name: log-service
   data:
     mongodb:
-      database: ${MONGODB_SCHEMA:testing-final}
+      database: ${MONGODB_SCHEMA:bni-bootcamp-logs}
       host: ${MONGODB_HOST:localhost}
       port: ${MONGODB_PORT:27017}
-
   kafka:
     consumer:
       bootstrap-servers: localhost:9092
@@ -22,13 +23,3 @@ spring:
       bootstrap-servers: localhost:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-
-server:
-  port: 8090
-  error:
-    include-binding-errors: always
-    include-message: always
-
-eureka:
-  instance:
-    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}:${random.uuid}
