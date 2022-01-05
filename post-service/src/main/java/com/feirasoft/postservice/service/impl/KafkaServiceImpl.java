@@ -11,8 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class KafkaServiceImpl implements KafkaService {
 
-    @Value("${app.topic}")
-    private static String TOPIC;
+    private static String TOPIC = "logs";
     private static final Logger logger = LoggerFactory.getLogger(KafkaServiceImpl.class);
 
     @Autowired
