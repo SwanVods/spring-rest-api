@@ -1,5 +1,6 @@
 package com.feirasoft.authservice.controller;
 
+import com.feirasoft.authservice.dto.ProfileDto;
 import com.feirasoft.authservice.dto.UserDto;
 import com.feirasoft.authservice.model.User;
 import com.feirasoft.authservice.service.UserService;
@@ -8,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.Collection;
@@ -40,5 +39,21 @@ public class UserController {
 
         if (userDto == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(userDto);
+    }
+
+    @PostMapping("/profile")
+    public ResponseEntity addUserDetails(@RequestBody ProfileDto profileDto, Principal principal) {
+        if(principal == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        UserDto user = service.getUserDetails(principal.getName());
+        service.addUserProfile(profileDto, user.getId());
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/profile")
+    public ResponseEntity updateUserDetails(@RequestBody ProfileDto profileDto, Principal principal) {
+        if(principal == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        UserDto user = service.getUserDetails(principal.getName());
+        service.updateUserProfile(profileDto, user.getId());
+        return ResponseEntity.noContent().build();
     }
 }

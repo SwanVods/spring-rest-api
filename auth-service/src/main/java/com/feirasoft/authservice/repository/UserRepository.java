@@ -9,4 +9,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User getDistinctTopByUsername(String username);
     User findUserByEmail(String email);
     User findUserByUsername(String username);
+    User findUserById(Long id);
 }

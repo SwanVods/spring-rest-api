@@ -1,6 +1,5 @@
 package com.feirasoft.authservice.dto;
 
-import com.feirasoft.authservice.model.UserProfile;
 import com.feirasoft.authservice.model.UserRoles;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +12,7 @@ public class UserDto {
     private Long id;
     private String username;
     private String email;
-    private UserProfile profile;
+    private ProfileDto profile;
     private UserRoles role;
     private boolean active;
 }

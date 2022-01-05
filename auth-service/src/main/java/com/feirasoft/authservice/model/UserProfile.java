@@ -17,7 +17,7 @@ public class UserProfile implements Serializable {
     @Id
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @MapsId
     private User user;
 

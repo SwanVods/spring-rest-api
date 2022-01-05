@@ -1,10 +1,9 @@
 package com.feirasoft.authservice.service.impl;
 
 
-import com.feirasoft.authservice.model.User;
-import com.feirasoft.authservice.dto.TokenDto;
 import com.feirasoft.authservice.dto.AuthDto;
-import com.feirasoft.authservice.model.UserProfile;
+import com.feirasoft.authservice.dto.TokenDto;
+import com.feirasoft.authservice.model.User;
 import com.feirasoft.authservice.model.UserRoles;
 import com.feirasoft.authservice.repository.UserRepository;
 import com.feirasoft.authservice.security.JwtProvider;
@@ -40,6 +39,7 @@ public class AuthServiceImpl implements AuthService {
         User user = new User()
                 .setUsername(req.getUsername())
                 .setPassword(passwordEncoder.encode(req.getPassword()))
+                .setEmail(req.getEmail())
                 .setRole(UserRoles.STUDENT);
         // TODO: Send logs to kafka
         return repository.save(user);
