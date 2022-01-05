@@ -1,16 +1,22 @@
-app:
-  topic: logs
+server:
+  port: 8080
 
 spring:
   application:
-    name: post-service
-
-  data:
-    mongodb:
-      database: ${MONGODB_SCHEMA:testing-final}
-      host: ${MONGODB_HOST:localhost}
-      port: ${MONGODB_PORT:27017}
-
+    name: auth-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/bni-bootcamp
+    username: postgres
+    password: root
+  security:
+    user:
+      name: admin
+      password: admin
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
   kafka:
     consumer:
       bootstrap-servers: localhost:9092
@@ -22,12 +28,6 @@ spring:
       bootstrap-servers: localhost:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-
-server:
-  port: 8090
-  error:
-    include-binding-errors: always
-    include-message: always
 
 eureka:
   instance:

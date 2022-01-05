@@ -2,11 +2,17 @@ server:
   port: 8084
 
 app:
-  topic: postEvent
+  topic: logs
 
 spring:
+  application:
+    name: log-service
+  data:
+    mongodb:
+      database: ${MONGODB_SCHEMA:bni-bootcamp-logs}
+      host: ${MONGODB_HOST:localhost}
+      port: ${MONGODB_PORT:27017}
   kafka:
-    groupId: feiraGroup
     consumer:
       bootstrap-servers: localhost:9092
       group-id: feiraGroup
