@@ -1,10 +1,10 @@
-package com.feirasoft.kafkaservice;
+package com.feirasoft.logservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class KafkaServiceApplicationTests {
+class LogServiceApplicationTests {
 
     @Test
     void contextLoads() {

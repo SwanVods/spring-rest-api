@@ -42,7 +42,7 @@ public class PostController {
         return ResponseEntity.ok(post);
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity storePost(@RequestBody @Valid PostRequest post) {
         PostDto postDto = postService.storePost(new PostDto()
                 .setTitle(post.getTitle())
@@ -51,7 +51,7 @@ public class PostController {
         return ResponseEntity.ok(postDto);
     }
 
-    @PatchMapping("/update/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity updatePost(@PathVariable String id, @RequestBody @Valid PostRequest post) {
         PostDto postDto = postService.updatePost(id, new PostDto()
                 .setTitle(post.getTitle())
@@ -63,7 +63,7 @@ public class PostController {
         return ResponseEntity.ok(postDto);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity deletePost(@PathVariable String id) {
         boolean deleted = postService.deletePost(id);
         if(deleted) return ResponseEntity.noContent().build();
@@ -82,7 +82,7 @@ public class PostController {
         return ResponseEntity.ok(category);
     }
 
-    @PostMapping("/categories/create")
+    @PostMapping("/categories")
     public ResponseEntity storeCategory(@RequestBody @Valid CategoryRequest category) {
         CategoryDto categoryDto = postCategoryService.createCategory(
                 new CategoryDto().setName(category.getName())
@@ -91,7 +91,7 @@ public class PostController {
         return ResponseEntity.ok(categoryDto);
     }
 
-    @PatchMapping("/categories/update/{name}")
+    @PatchMapping("/categories/{name}")
     public ResponseEntity updateCategory(
             @PathVariable String name,
             @RequestBody @Valid CategoryRequest category) {
@@ -106,11 +106,10 @@ public class PostController {
         return ResponseEntity.ok(categoryDto);
     }
 
-    @DeleteMapping("/categories/delete/{name}")
+    @DeleteMapping("/categories/{name}")
     public ResponseEntity deleteCategory(@PathVariable String name) {
         boolean deleted = postCategoryService.deleteCategory(name);
         if(deleted) return ResponseEntity.noContent().build();
         return ResponseEntity.notFound().build();
     }
-
 }

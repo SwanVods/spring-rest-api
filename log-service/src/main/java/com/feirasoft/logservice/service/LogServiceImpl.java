@@ -1,7 +1,7 @@
-package com.feirasoft.kafkaservice.service;
+package com.feirasoft.logservice.service;
 
-import com.feirasoft.kafkaservice.model.Log;
-import com.feirasoft.kafkaservice.repository.LogRepository;
+import com.feirasoft.logservice.model.Log;
+import com.feirasoft.logservice.repository.LogRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

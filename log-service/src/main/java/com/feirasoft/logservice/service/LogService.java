@@ -1,6 +1,6 @@
-package com.feirasoft.kafkaservice.service;
+package com.feirasoft.logservice.service;
 
-import com.feirasoft.kafkaservice.model.Log;
+import com.feirasoft.logservice.model.Log;
 
 import java.util.Collection;
 

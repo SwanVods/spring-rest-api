@@ -1,4 +1,4 @@
-package com.feirasoft.kafkaservice.model;
+package com.feirasoft.logservice.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

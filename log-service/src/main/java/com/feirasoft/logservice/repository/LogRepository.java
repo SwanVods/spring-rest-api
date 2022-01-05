@@ -1,6 +1,6 @@
-package com.feirasoft.kafkaservice.repository;
+package com.feirasoft.logservice.repository;
 
-import com.feirasoft.kafkaservice.model.Log;
+import com.feirasoft.logservice.model.Log;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

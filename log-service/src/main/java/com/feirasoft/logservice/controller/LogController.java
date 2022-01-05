@@ -1,10 +1,7 @@
-package com.feirasoft.kafkaservice.controller;
+package com.feirasoft.logservice.controller;
 
-import com.feirasoft.kafkaservice.model.Log;
-import com.feirasoft.kafkaservice.service.ConsumerService;
-import com.feirasoft.kafkaservice.service.ConsumerServiceImpl;
-import com.feirasoft.kafkaservice.service.LogService;
-import com.feirasoft.kafkaservice.service.Producer;
+import com.feirasoft.logservice.model.Log;
+import com.feirasoft.logservice.service.LogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

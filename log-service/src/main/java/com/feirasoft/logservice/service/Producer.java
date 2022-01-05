@@ -1,4 +1,4 @@
-package com.feirasoft.kafkaservice.service;
+package com.feirasoft.logservice.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
