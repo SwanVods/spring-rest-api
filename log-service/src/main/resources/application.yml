@@ -1,0 +1,25 @@
+server:
+  port: 8070
+
+app:
+  topic: logs
+
+spring:
+  application:
+    name: log-service
+  data:
+    mongodb:
+      database: ${MONGODB_SCHEMA:bni-bootcamp-logs}
+      host: ${MONGODB_HOST:localhost}
+      port: ${MONGODB_PORT:27017}
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: feiraGroup
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
