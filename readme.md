@@ -17,11 +17,11 @@
 - As a learner, they can give comment, like and share for their training
 
 ## High Level Architecture
-![hla](misc/architecture.jpg)
+![hla](.misc/architecture.jpg)
 
 ## Entity Relation Diagram
-![sql](misc/sql.jpg)
+![sql](.misc/sql.jpg)
 
 ## NoSql Data Model
-![nosql](misc/nosql.jpg)
+![nosql](.misc/nosql.jpg)
 
