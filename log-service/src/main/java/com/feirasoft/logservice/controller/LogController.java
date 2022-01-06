@@ -1,6 +1,7 @@
 package com.feirasoft.logservice.controller;
 
 import com.feirasoft.logservice.model.Log;
+import com.feirasoft.logservice.model.LogDto;
 import com.feirasoft.logservice.service.LogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,10 @@ public class LogController {
     private LogService service;
 
     @PostMapping
-    public ResponseEntity<Log> store(@RequestBody String message){
-        return ResponseEntity.ok(service.storeLog(new Log().setData(message)));
+    public ResponseEntity<LogDto> store(@RequestBody String message){
+        LogDto logDto = new LogDto();
+        logDto.setData(message);
+        return ResponseEntity.ok(service.storeLog(logDto));
     }
 
     @GetMapping

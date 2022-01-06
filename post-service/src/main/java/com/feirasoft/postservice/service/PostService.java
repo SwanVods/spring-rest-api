@@ -17,4 +17,6 @@ public interface PostService {
     PostDto viewPost(String id);
 
     void likePost(String id);
+
+    int countPostLike(PostDto postDto);
 }

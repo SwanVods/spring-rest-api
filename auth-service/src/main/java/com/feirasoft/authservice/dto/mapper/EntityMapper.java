@@ -1,6 +1,5 @@
 package com.feirasoft.authservice.dto.mapper;
 
-import com.feirasoft.authservice.dto.AuthDto;
 import com.feirasoft.authservice.dto.ProfileDto;
 import com.feirasoft.authservice.dto.UserDto;
 import com.feirasoft.authservice.model.User;

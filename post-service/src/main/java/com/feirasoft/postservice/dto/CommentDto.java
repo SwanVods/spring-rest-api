@@ -9,6 +9,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class CommentDto {
     String id;
-    UserDto userDto;
     String comment;
+    String postId;
+    int userId;
 }

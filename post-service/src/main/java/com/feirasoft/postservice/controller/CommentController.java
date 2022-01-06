@@ -14,19 +14,19 @@ public class CommentController {
     private final CommentService service;
 
     @PostMapping
-    public ResponseEntity store(@RequestBody CommentDto comment ) {
+    public ResponseEntity<?> store(@RequestBody CommentDto comment) {
         service.storeComment(comment);
         return ResponseEntity.noContent().build();
     }
-    @PatchMapping
-    public ResponseEntity update(@RequestBody CommentDto commentDto) {
-        service.updateComment(commentDto.getId(), commentDto);
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") String id, @RequestBody CommentDto commentDto) {
+        service.updateComment(id, commentDto);
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping
-    public ResponseEntity delete(@RequestBody CommentDto commentDto) {
-        if(service.deleteComment(commentDto.getId())) return ResponseEntity.noContent().build();
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") String id) {
+        if(service.deleteComment(id)) return ResponseEntity.noContent().build();
         return ResponseEntity.notFound().build();
     }
 }

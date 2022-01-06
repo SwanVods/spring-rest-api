@@ -1,13 +1,11 @@
 package com.feirasoft.postservice.model;
 
-import com.feirasoft.postservice.dto.UserDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -19,9 +17,8 @@ import java.util.Date;
 public class Comment {
     @Id
     private String id;
-
-    private UserDto userDto;
-
+    private String postId;
+    private int userId;
     private String comment;
 
     @CreatedDate

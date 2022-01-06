@@ -1,9 +1,12 @@
 package com.feirasoft.postservice.service.impl;
 
 
-import com.feirasoft.postservice.dto.mapper.EntityMapper;
+import com.feirasoft.postservice.dto.CommentDto;
 import com.feirasoft.postservice.dto.PostDto;
+import com.feirasoft.postservice.dto.mapper.EntityMapper;
 import com.feirasoft.postservice.model.Post;
+import com.feirasoft.postservice.repository.CommentRepository;
+import com.feirasoft.postservice.repository.LikeRepository;
 import com.feirasoft.postservice.repository.PostRepository;
 import com.feirasoft.postservice.service.KafkaService;
 import com.feirasoft.postservice.service.PostService;
@@ -22,6 +25,10 @@ public class PostServiceImpl implements PostService {
 
     @Autowired
     private final PostRepository postRepository;
+    @Autowired
+    private final LikeRepository likeRepository;
+    @Autowired
+    private final CommentRepository commentRepository;
     @Autowired
     private final KafkaService kafkaService;
     @Autowired
@@ -79,7 +86,9 @@ public class PostServiceImpl implements PostService {
     public PostDto viewPost(String id) {
         Optional<Post> post = postRepository.findById(id);
         if(post.isPresent()) {
-            Post postModel = post.get();
+            Collection<CommentDto> comments = commentRepository.findCommentsByPostId(id);
+            System.out.println(comments);
+            Post postModel = post.get().setComments(comments);
             return EntityMapper.toPostDto(postModel);
         }
         return null;
@@ -93,6 +102,12 @@ public class PostServiceImpl implements PostService {
             postModel.setLikeCount(postModel.getLikeCount()+1);
             EntityMapper.toPostDto(postRepository.save(postModel));
         }
+    }
+
+    @Override
+    public int countPostLike(PostDto postDto) {
+        Optional<Post> post = postRepository.findById(postDto.getId());
+        return post.map(value -> likeRepository.countPostLikeByLiked(value.getId(), true)).orElse(0);
     }
 
 }

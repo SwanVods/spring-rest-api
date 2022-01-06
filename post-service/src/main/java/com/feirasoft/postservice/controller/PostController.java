@@ -2,10 +2,12 @@ package com.feirasoft.postservice.controller;
 
 
 import com.feirasoft.postservice.dto.CategoryDto;
+import com.feirasoft.postservice.dto.LikeDto;
 import com.feirasoft.postservice.dto.PostDto;
+import com.feirasoft.postservice.service.LikeService;
 import com.feirasoft.postservice.service.PostCategoryService;
 import com.feirasoft.postservice.service.PostService;
-import org.springframework.beans.factory.annotation.Qualifier;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,16 +18,13 @@ import java.util.Collection;
 @SuppressWarnings("ALL")
 @RestController
 @RequestMapping("/api/v1/posts")
+@RequiredArgsConstructor
 public class PostController {
 
     private final PostService postService;
-
+    private final LikeService likeService;
     private final PostCategoryService postCategoryService;
 
-    public PostController(@Qualifier("postServiceImpl") PostService postService, PostCategoryService postCategoryService) {
-        this.postService = postService;
-        this.postCategoryService = postCategoryService;
-    }
 
     @GetMapping
     public ResponseEntity retrieveAllPost() {
@@ -39,6 +38,7 @@ public class PostController {
         if(post == null) {
             return ResponseEntity.notFound().build();
         }
+        post.setLikeCount(postService.countPostLike(post));
         return ResponseEntity.ok(post);
     }
 
@@ -111,5 +111,11 @@ public class PostController {
         boolean deleted = postCategoryService.deleteCategory(name);
         if(deleted) return ResponseEntity.noContent().build();
         return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/like")
+    public ResponseEntity doLike(@RequestBody LikeDto likeDto) {
+        likeService.doLike(likeDto);
+        return ResponseEntity.noContent().build();
     }
 }

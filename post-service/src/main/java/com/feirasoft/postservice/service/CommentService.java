@@ -7,7 +7,7 @@ import java.util.Collection;
 public interface CommentService {
 
     // post behavior
-    Collection<CommentDto> retreiveComments();
+    Collection<CommentDto> retreiveComments(String id);
 
     // user behavior
     CommentDto storeComment(CommentDto comment);

@@ -41,7 +41,6 @@ public class AuthServiceImpl implements AuthService {
                 .setPassword(passwordEncoder.encode(req.getPassword()))
                 .setEmail(req.getEmail())
                 .setRole(UserRoles.STUDENT);
-        // TODO: Send logs to kafka
         return repository.save(user);
     }
 

@@ -20,7 +20,7 @@ public class PostRequest {
     @NotBlank(message = "Content field cannot be empty.")
     private String content;
 
+    private int userId;
     private int likeCount;
-
     private Category category;
 }

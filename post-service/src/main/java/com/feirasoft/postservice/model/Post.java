@@ -1,6 +1,6 @@
 package com.feirasoft.postservice.model;
 
-import com.feirasoft.postservice.dto.UserDto;
+import com.feirasoft.postservice.dto.CommentDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -24,12 +24,13 @@ public class Post {
     private String content;
     private int likeCount;
 
-    private Collection<Comment> comments;
+    @DBRef
+    private Collection<CommentDto> comments;
 
     @DBRef
     private Category category;
 
-    private UserDto user;
+    private int userId;
 
     @CreatedDate
     private Date created_at;
