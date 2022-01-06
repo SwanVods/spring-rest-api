@@ -15,3 +15,13 @@
 - As a trainer, they can post new article related to insight/handons tutorial on particular categories
 - As a learner, they can see the detail of published training on the academy platform 
 - As a learner, they can give comment, like and share for their training
+
+## High Level Architecture
+![hla](misc/architecture.jpg)
+
+## Entity Relation Diagram
+![sql](misc/sql.jpg)
+
+## NoSql Data Model
+![nosql](misc/nosql.jpg)
+
